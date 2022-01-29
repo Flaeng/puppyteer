@@ -28,14 +28,14 @@ jobs:
         with:
           node-version: '14'
 
-      - name: NPM install
-        run: npm i
+      - name: npm install
+        run: npm install
 
-      - name: NPM run start
+      - name: npm run start
         run: npm run start
 
-      - name: NPM run start
+      - name: npm run start /w filter
         run: npm run 'start /w filter'
         
-      - name: NPM run start
+      - name: npm run start /w errors
         run: npm run 'start /w errors'
