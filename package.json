@@ -1,0 +1,25 @@
+{
+  "name": "test",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --experimental-modules index.js run -p tests",
+    "start /w filter": "node --experimental-modules index.js run -p tests -f *pricing*",
+    "start /w errors": "node --experimental-modules index.js run -p tests -e"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "commander": "^9.0.0",
+    "conf": "^10.1.1",
+    "glob": "^7.2.0",
+    "ora": "^5.4.1",
+    "puppeteer": "^13.1.2"
+  },
+  "bin": {
+    "puppyteer": "index.js"
+  }
+}
