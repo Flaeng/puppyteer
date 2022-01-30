@@ -19,11 +19,5 @@ jobs:
       - name: npm install
         run: npm install
 
-      #- name: npm run start
-        #run: npm run start
-
-      #- name: npm run start /w filter
-        #run: npm run 'start /w filter'
-        
-      #- name: npm run start /w errors
-        #run: npm run 'start /w errors'
+      - name: npm run start
+        run: node --experimental-modules index.js run -p tests -e
