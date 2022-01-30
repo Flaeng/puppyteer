@@ -67,6 +67,7 @@ async function run(args) {
     if (runExitCode === false) {
         if (core) {
             core.setFailed('One or more scripts failed');
+            return;
         }
         return 1;
     }
