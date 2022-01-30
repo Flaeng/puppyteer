@@ -10,40 +10,20 @@ const glob = require('glob');
 
 //https://stackoverflow.com/questions/58570325/how-to-turn-child-process-spawns-promise-syntax-to-async-await-syntax
 async function runScriptAsync(path) {
-    console.log('spawn');
     const child = spawn('node', [path]);
 
     child.on('spawn', () => { console.log('did spawn'); });
 
-    console.log('log errors');
     let error = "";
-    /*for await (const chunk of child.stderr) {
+    for await (const chunk of child.stderr) {
         error += chunk;
-    }*/
+    }
 
-    console.log('get exitcode');
     const exitCode = await new Promise((resolve, reject) => {
-        console.log('registering events');
-        child.on('close', () => {
-            console.log('did close');
-            resolve();
-        });
-        child.on('disconnect', () => {
-            console.log('did disconnect');
-            resolve();
-        });
-        child.on('error', () => {
-            console.log('did error');
-            resolve();
-        });
-        child.on('exit', () => {
-            console.log('did exit');
-            resolve();
-        });
-        console.log('registered events');
+        child.on('close', resolve);
     });
 
-    console.log('return');
+    console.log('return', exitCode);
     return { exitCode, error };
 }
 
@@ -51,34 +31,26 @@ async function runAllScriptsAsync(testList, showErrors) {
 
     for (let index = 0; index < testList.length; index++) {
         try {
-            console.log(`${(index + 1)} - starting`);
             const elem = testList[index];
 
-            /*
             const spinner = ora({
                 spinner: cliSpinners.point,
                 prefixText: `[${(index + 1).toString().padStart(testList.length.toString().length, '0')}/${testList.length}] ${elem.filename}`
             }).start();
-            */
-            console.log(`[${(index + 1).toString().padStart(testList.length.toString().length, '0')}/${testList.length}] ${elem.filename}`);
             
-            console.log(`${(index + 1)} - runScriptAsync start`);
             const result = await runScriptAsync(elem.filepath);
-            console.log(`${(index + 1)} - runScriptAsync end`);
-
-            console.log('result.exitCode', result.exitCode);
+            
             if (result.exitCode === 0) {
-                console.log(chalk.green.bold('success'));
-                //spinner.succeed(chalk.green.bold('success'));
+                //console.log(chalk.green.bold('success'));
+                spinner.succeed(chalk.green.bold('success'));
             } else {
-                console.log(chalk.red.bold('failed'));
-                //spinner.fail(chalk.red.bold('failed'));
+                //console.log(chalk.red.bold('failed'));
+                spinner.fail(chalk.red.bold('failed'));
                 if (showErrors === true) {
                     console.error(result.error);
                 }
             }
             elem.exitCode = result.exitCode;
-            console.log(`${(index + 1)} - Done`);
         }
         catch (e) {
             console.error(e);
@@ -101,11 +73,11 @@ async function run(args) {
         .map(x => { return { filepath: x, filename: path.basename(x), exitCode: null, error: null }; });
 
     const didSucceed = await runAllScriptsAsync(tests, args.errors);
-    //console.log('runExitCode', runExitCode);
     if (didSucceed === false) {
         if (core) {
             core.setFailed('One or more scripts failed');
-            process.exit(1);
+            //process.exit(1);
+            return 1;
         }
         return 1;
     }
