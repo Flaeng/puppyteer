@@ -1,4 +1,4 @@
-name: CI
+name: run with filter
 
 on:
   push:

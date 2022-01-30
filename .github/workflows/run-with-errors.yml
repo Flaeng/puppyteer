@@ -1,4 +1,4 @@
-name: CI
+name: run with detailed errors
 
 on:
   push:

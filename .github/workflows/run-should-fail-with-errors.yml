@@ -1,4 +1,4 @@
-name: CI
+name: should fail - run with errors
 
 on:
   push:
