@@ -26,14 +26,14 @@ async function runScriptAsync(path) {
 
 async function runAllScriptsAsync(testList, showErrors) {
 
-    for (let i = 0; i < testList.length; i++) {
+    for (let index = 0; index < testList.length; index++) {
         try {
             console.log(`${(index + 1)} - starting`);
-            const elem = testList[i];
+            const elem = testList[index];
 
             const spinner = ora({
                 spinner: cliSpinners.point,
-                prefixText: `[${(i + 1).toString().padStart(testList.length.toString().length, '0')}/${testList.length}] ${elem.filename}`
+                prefixText: `[${(index + 1).toString().padStart(testList.length.toString().length, '0')}/${testList.length}] ${elem.filename}`
             }).start();
 
             console.log(`${(index + 1)} - runScriptAsync start`);
