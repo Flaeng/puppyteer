@@ -12,8 +12,6 @@ const glob = require('glob');
 async function runScriptAsync(path) {
     const child = spawn('node', [path]);
 
-    child.on('spawn', () => { console.log('did spawn'); });
-
     let error = "";
     for await (const chunk of child.stderr) {
         error += chunk;
@@ -23,7 +21,6 @@ async function runScriptAsync(path) {
         child.on('close', resolve);
     });
 
-    console.log('return', exitCode);
     return { exitCode, error };
 }
 
