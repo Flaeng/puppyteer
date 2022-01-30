@@ -22,5 +22,5 @@ jobs:
       - name: npm i -g
         run: npm i -g
 
-      - name: puppyteer -p tests
-        run: puppyteer -p tests
+      - name: puppyteer run -p tests
+        run: puppyteer run -p tests
