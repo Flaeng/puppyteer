@@ -60,6 +60,10 @@ jobs:
 
 Follow Google's guide for the devtools recorder: https://developer.chrome.com/docs/devtools/recorder/
 
+## Known issues
+
+Known issues are shown in [this document](/documentation/known-issues.md)
+
 ## Example
 
 ![Example 1](/documentation/example1.jpg)
