@@ -64,7 +64,9 @@ async function run(args) {
     const runExitCode = await runAllScripts(tests, args.errors);
     //console.log('runExitCode', runExitCode);
     if (runExitCode === false) {
-        core.setFailed(error.message);
+        if (core) {
+            core.setFailed('One or more scripts failed');
+        }
         return 1;
     }
     return 0;

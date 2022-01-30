@@ -8,6 +8,7 @@
     "run with filter": "node --experimental-modules index.js run -p tests -f \"*[3|5]-pricing*\"",
     "run with detailed errors": "node --experimental-modules index.js run -p tests -e",
     "should fail - run": "node --experimental-modules index.js run -p tests-with-errors",
+    "should fail - run with filter": "node --experimental-modules index.js run -p tests-with-errors -f \"*02-fails*\"",
     "should fail - run with errors": "node --experimental-modules index.js run -p tests-with-errors -e"
   },
   "keywords": [],
