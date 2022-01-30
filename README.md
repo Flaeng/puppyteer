@@ -12,7 +12,7 @@ CLI tool for running Google Chrome DevTools Recordings
 
 1) Install puppyteer
 ```
-npm i @flaeng/puppyteer -g
+npm i -g @flaeng/puppyteer 
 ```
 
 2) Navigate to the folder with the .js-files and run puppyteer
