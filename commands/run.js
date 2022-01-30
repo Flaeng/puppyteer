@@ -60,7 +60,9 @@ async function run(args) {
         .filter(x => path.extname(x).toLocaleLowerCase() === '.js')
         .map(x => { return { filepath: x, filename: path.basename(x), exitCode: null, error: null }; });
 
-    return await runAllScripts(tests, args.errors);
+    const runExitCode = await runAllScripts(tests, args.errors);
+    //console.log('runExitCode', runExitCode);
+    return runExitCode ? 0 : 1;
 }
 
 module.exports = run;

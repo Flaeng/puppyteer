@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node --experimental-modules index.js run -p tests",
-    "start /w filter": "node --experimental-modules index.js run -p tests -f *pricing*",
-    "start /w errors": "node --experimental-modules index.js run -p tests -e"
+    "run": "node --experimental-modules index.js run -p tests",
+    "run with filter": "node --experimental-modules index.js run -p tests -f \"*[3|5]-pricing*\"",
+    "run with detailed errors": "node --experimental-modules index.js run -p tests -e",
+    "should fail - run": "node --experimental-modules index.js run -p tests-with-errors",
+    "should fail - run with errors": "node --experimental-modules index.js run -p tests-with-errors -e"
   },
   "keywords": [],
   "author": "",

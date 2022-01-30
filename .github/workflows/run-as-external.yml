@@ -1,4 +1,4 @@
-name: run with filter
+name: run as external
 
 on:
   push:
@@ -19,5 +19,8 @@ jobs:
       - name: npm install
         run: npm install
 
-      - name: npm run start
-        run: node --experimental-modules index.js run -p tests -f "*[3|5]-pricing*"
+      - name: npm i -g
+        run: npm i -g
+
+      - name: puppyteer -p tests
+        run: puppyteer -p tests
