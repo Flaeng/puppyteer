@@ -1,4 +1,5 @@
 const fs = require('fs');
+const core = require('core');
 const path = require('path');
 const { spawn } = require('child_process');
 const chalk = require('chalk');
@@ -62,7 +63,11 @@ async function run(args) {
 
     const runExitCode = await runAllScripts(tests, args.errors);
     //console.log('runExitCode', runExitCode);
-    return runExitCode ? 0 : 1;
+    if (runExitCode === false) {
+        core.setFailed(error.message);
+        return 0;
+    }
+    return 1;
 }
 
 module.exports = run;
