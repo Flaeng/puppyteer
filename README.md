@@ -8,8 +8,7 @@ CLI tool for running Google Chrome DevTools Recordings
 [![should fail - run with errors](https://github.com/Flaeng/puppyteer/actions/workflows/run-should-fail-with-errors.yml/badge.svg)](https://github.com/Flaeng/puppyteer/actions/workflows/run-should-fail-with-errors.yml)
 [![should fail - run](https://github.com/Flaeng/puppyteer/actions/workflows/run-should-fail.yml/badge.svg)](https://github.com/Flaeng/puppyteer/actions/workflows/run-should-fail.yml)
 
-## How to
-
+## How to (local)
 
 1) Install puppyteer
 ```
@@ -23,6 +22,43 @@ puppyteer run
 ```
 
 Use puppyteer -h for help and list of commands
+
+## How to (Github action)
+
+1) Put your recording-files in a folder at root ('ui-tests' is used as an example)
+
+2) Create a workflow on Github and paste the following code:
+
+```
+name: run
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: npm install
+        run: npm install -g @flaeng/puppyteer
+
+      - name: puppyteer run
+        run: puppyteer run -p ui-tests
+```
+
+
+## How to get scripts
+
+Follow Google's guide for the devtools recorder: https://developer.chrome.com/docs/devtools/recorder/
 
 ## Example
 
