@@ -11,3 +11,23 @@ CLI tool for running Google Chrome DevTools Recordings
 [![should fail - run with errors](https://github.com/Flaeng/puppyteer/actions/workflows/run-should-fail-with-errors.yml/badge.svg)](https://github.com/Flaeng/puppyteer/actions/workflows/run-should-fail-with-errors.yml)
 
 [![should fail - run](https://github.com/Flaeng/puppyteer/actions/workflows/run-should-fail.yml/badge.svg)](https://github.com/Flaeng/puppyteer/actions/workflows/run-should-fail.yml)
+
+## How to
+
+
+1) Install puppyteer
+```
+npm i puppyteer
+```
+
+2) Navigate to the folder with the .js-files and run puppyteer
+
+```
+puppyteer
+```
+
+Use puppyteer -h for help and list of commands
+
+## Example
+
+![Example 1](/documentation/example1.jpg)
