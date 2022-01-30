@@ -39,10 +39,8 @@ async function runAllScriptsAsync(testList, showErrors) {
             const result = await runScriptAsync(elem.filepath);
             
             if (result.exitCode === 0) {
-                //console.log(chalk.green.bold('success'));
                 spinner.succeed(chalk.green.bold('success'));
             } else {
-                //console.log(chalk.red.bold('failed'));
                 spinner.fail(chalk.red.bold('failed'));
                 if (showErrors === true) {
                     console.error(result.error);
