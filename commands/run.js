@@ -4,6 +4,7 @@ const path = require('path');
 const { spawn } = require('child_process');
 const chalk = require('chalk');
 const ora = require('ora');
+const process = require('process');
 const cliSpinners = require('cli-spinners');
 const glob = require('glob');
 
@@ -50,7 +51,7 @@ async function runAllScripts(testList, showErrors) {
 }
 
 async function run(args) {
-    const relativePath = args.path || __dirname;
+    const relativePath = args.path || process.cwd();
 
     if (fs.existsSync(relativePath) === false) {
         console.error(`Directory at path not found: ${relativePath}`);
