@@ -52,19 +52,24 @@ async function runAllScriptsAsync(testList, showErrors) {
             console.log(`${(index + 1)} - starting`);
             const elem = testList[index];
 
+            /*
             const spinner = ora({
                 spinner: cliSpinners.point,
                 prefixText: `[${(index + 1).toString().padStart(testList.length.toString().length, '0')}/${testList.length}] ${elem.filename}`
             }).start();
-
+            */
+            console.log(`[${(index + 1).toString().padStart(testList.length.toString().length, '0')}/${testList.length}] ${elem.filename}`);
+            
             console.log(`${(index + 1)} - runScriptAsync start`);
             const result = await runScriptAsync(elem.filepath);
             console.log(`${(index + 1)} - runScriptAsync end`);
 
             if (result.exitCode === 0) {
-                spinner.succeed(chalk.green.bold('success'));
+                console.log(chalk.green.bold('success'));
+                //spinner.succeed(chalk.green.bold('success'));
             } else {
-                spinner.fail(chalk.red.bold('failed'));
+                console.log(chalk.red.bold('failed'));
+                //spinner.fail(chalk.red.bold('failed'));
                 if (showErrors === true) {
                     console.error(result.error);
                 }
