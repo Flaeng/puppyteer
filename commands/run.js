@@ -28,6 +28,7 @@ async function runAllScriptsAsync(testList, showErrors) {
 
     for (let i = 0; i < testList.length; i++) {
         try {
+            console.log(`${(index + 1)} - starting`);
             const elem = testList[i];
 
             const spinner = ora({
@@ -35,7 +36,9 @@ async function runAllScriptsAsync(testList, showErrors) {
                 prefixText: `[${(i + 1).toString().padStart(testList.length.toString().length, '0')}/${testList.length}] ${elem.filename}`
             }).start();
 
+            console.log(`${(index + 1)} - runScriptAsync start`);
             const result = await runScriptAsync(elem.filepath);
+            console.log(`${(index + 1)} - runScriptAsync end`);
 
             if (result.exitCode === 0) {
                 spinner.succeed(chalk.green.bold('success'));
@@ -46,6 +49,7 @@ async function runAllScriptsAsync(testList, showErrors) {
                 }
             }
             elem.exitCode = result.exitCode;
+            console.log(`${(index + 1)} - Done`);
         }
         catch (e) {
             console.error(e);
@@ -72,7 +76,7 @@ async function run(args) {
     if (didSucceed === false) {
         if (core) {
             core.setFailed('One or more scripts failed');
-            return;
+            process.exit();
         }
         return 1;
     }
