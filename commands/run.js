@@ -24,27 +24,32 @@ async function runScriptAsync(path) {
     return { exitCode, error };
 }
 
-async function runAllScripts(testList, showErrors) {
+async function runAllScriptsAsync(testList, showErrors) {
 
     for (let i = 0; i < testList.length; i++) {
-        const elem = testList[i];
+        try {
+            const elem = testList[i];
 
-        const spinner = ora({
-            spinner: cliSpinners.point,
-            prefixText: `[${(i + 1).toString().padStart(testList.length.toString().length, '0')}/${testList.length}] ${elem.filename}`
-        }).start();
+            const spinner = ora({
+                spinner: cliSpinners.point,
+                prefixText: `[${(i + 1).toString().padStart(testList.length.toString().length, '0')}/${testList.length}] ${elem.filename}`
+            }).start();
 
-        const result = await runScriptAsync(elem.filepath);
+            const result = await runScriptAsync(elem.filepath);
 
-        if (result.exitCode === 0) {
-            spinner.succeed(chalk.green.bold('success'));
-        } else {
-            spinner.fail(chalk.red.bold('failed'));
-            if (showErrors === true) {
-                console.error(result.error);
+            if (result.exitCode === 0) {
+                spinner.succeed(chalk.green.bold('success'));
+            } else {
+                spinner.fail(chalk.red.bold('failed'));
+                if (showErrors === true) {
+                    console.error(result.error);
+                }
             }
+            elem.exitCode = result.exitCode;
         }
-        elem.exitCode = result.exitCode;
+        catch (e) {
+            console.error(e);
+        }
     }
 
     return testList.filter(x => x.exitCode === 0).length === testList.length;
@@ -62,9 +67,9 @@ async function run(args) {
         .filter(x => path.extname(x).toLocaleLowerCase() === '.js')
         .map(x => { return { filepath: x, filename: path.basename(x), exitCode: null, error: null }; });
 
-    const runExitCode = await runAllScripts(tests, args.errors);
+    const didSucceed = await runAllScriptsAsync(tests, args.errors);
     //console.log('runExitCode', runExitCode);
-    if (runExitCode === false) {
+    if (didSucceed === false) {
         if (core) {
             core.setFailed('One or more scripts failed');
             return;
