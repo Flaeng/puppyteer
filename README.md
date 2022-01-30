@@ -23,7 +23,7 @@ npm i puppyteer
 2) Navigate to the folder with the .js-files and run puppyteer
 
 ```
-puppyteer
+puppyteer run
 ```
 
 Use puppyteer -h for help and list of commands
@@ -31,3 +31,5 @@ Use puppyteer -h for help and list of commands
 ## Example
 
 ![Example 1](/documentation/example1.jpg)
+
+![Supported options](/documentation/supported-options.jpg)
