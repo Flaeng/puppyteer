@@ -22,6 +22,9 @@ async function runScriptAsync(path) {
     console.log('get exitcode');
     const exitCode = await new Promise((resolve, reject) => {
         child.on('close', resolve);
+        child.on('disconnect', resolve);
+        child.on('error', resolve);
+        child.on('exit', resolve);
     });
 
     console.log('return');
