@@ -22,7 +22,7 @@ async function runScriptAsync(path) {
 }
 
 async function runAllScriptsAsync(testList, showErrors) {
-
+    console.log('showErrors', showErrors);
     for (let index = 0; index < testList.length; index++) {
         try {
             const elem = testList[index];
