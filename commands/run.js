@@ -13,6 +13,8 @@ async function runScriptAsync(path) {
     console.log('spawn');
     const child = spawn('node', [path]);
 
+    child.on('spawn', () => { console.log('did spawn'); });
+
     console.log('log errors');
     let error = "";
     /*for await (const chunk of child.stderr) {
@@ -21,10 +23,22 @@ async function runScriptAsync(path) {
 
     console.log('get exitcode');
     const exitCode = await new Promise((resolve, reject) => {
-        child.on('close', resolve);
-        child.on('disconnect', resolve);
-        child.on('error', resolve);
-        child.on('exit', resolve);
+        child.on('close', () => {
+            console.log('did close');
+            resolve();
+        });
+        child.on('disconnect', () => {
+            console.log('did disconnect');
+            resolve();
+        });
+        child.on('error', () => {
+            console.log('did error');
+            resolve();
+        });
+        child.on('exit', () => {
+            console.log('did exit');
+            resolve();
+        });
     });
 
     console.log('return');
