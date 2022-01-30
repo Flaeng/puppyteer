@@ -75,7 +75,7 @@ async function run(args) {
         //if (core) {
             //core.setFailed('One or more scripts failed');
         //}
-        throw 'One or more scripts failed';
+        //throw 'One or more scripts failed';
         return 1;
     }
     return 0;
