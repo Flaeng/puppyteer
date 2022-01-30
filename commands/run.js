@@ -66,6 +66,7 @@ async function runAllScriptsAsync(testList, showErrors) {
             const result = await runScriptAsync(elem.filepath);
             console.log(`${(index + 1)} - runScriptAsync end`);
 
+            console.log('result.exitCode', result.exitCode);
             if (result.exitCode === 0) {
                 console.log(chalk.green.bold('success'));
                 //spinner.succeed(chalk.green.bold('success'));
