@@ -11,10 +11,12 @@ const glob = require('glob');
 //https://stackoverflow.com/questions/58570325/how-to-turn-child-process-spawns-promise-syntax-to-async-await-syntax
 async function runScriptAsync(path) {
 
+    let error = '';
     const exitCode = await new Promise((resolve, reject) => {
         const cmd = `node ${path}`;
         exec(cmd, (err, stdout, stderr) => {
             if (err) {
+                error = err;
                 reject(err);
                 return;
             }
@@ -33,7 +35,8 @@ async function runScriptAsync(path) {
         child.on('close', resolve);
     });
 */
-    console.log('exitCode', exitCode);
+console.log('exitCode', exitCode);
+console.log('typeof exitCode', typeof exitCode);
     return { exitCode, error };
 }
 
