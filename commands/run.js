@@ -10,17 +10,16 @@ const glob = require('glob');
 
 async function runScriptAsync(path) {
     try {
-        
-    return await new Promise((resolve, reject) => {
-        const cmd = `node ${path}`;
-        exec(cmd, (err, stdout, stderr) => {
-            if (err) {
-                reject({ exitCode: 1, error: err });
-                return;
-            }
-            resolve({ exitCode: 0, error: null });
-        })
-    });
+        return await new Promise((resolve, reject) => {
+            const cmd = `node ${path}`;
+            exec(cmd, (err, stdout, stderr) => {
+                if (err) {
+                    reject({ exitCode: 1, error: err });
+                    return;
+                }
+                resolve({ exitCode: 0, error: null });
+            })
+        });
     }
     catch (e) {
         return { exitCode: 1, error: e };
@@ -75,8 +74,6 @@ async function run(args) {
     if (didSucceed === false) {
         if (core) {
             core.setFailed('One or more scripts failed');
-            //process.exit(1);
-            return 1;
         }
         return 1;
     }
