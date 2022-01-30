@@ -1,5 +1,5 @@
 const fs = require('fs');
-const core = require('@actions/core');
+//const core = require('@actions/core');
 const path = require('path');
 const { exec } = require('child_process');
 const chalk = require('chalk');
@@ -72,9 +72,10 @@ async function run(args) {
 
     const didSucceed = await runAllScriptsAsync(tests, args.errors || false);
     if (didSucceed === false) {
-        if (core) {
-            core.setFailed('One or more scripts failed');
-        }
+        //if (core) {
+            //core.setFailed('One or more scripts failed');
+        //}
+        throw 'One or more scripts failed';
         return 1;
     }
     return 0;
