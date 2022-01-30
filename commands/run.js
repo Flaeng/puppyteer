@@ -9,6 +9,8 @@ const cliSpinners = require('cli-spinners');
 const glob = require('glob');
 
 async function runScriptAsync(path) {
+    try {
+        
     return await new Promise((resolve, reject) => {
         const cmd = `node ${path}`;
         exec(cmd, (err, stdout, stderr) => {
@@ -19,10 +21,13 @@ async function runScriptAsync(path) {
             resolve({ exitCode: 0, error: null });
         })
     });
+    }
+    catch (e) {
+        return { exitCode: 1, error: e };
+    }
 }
 
 async function runAllScriptsAsync(testList, showErrors) {
-    console.log('showErrors', showErrors);
     for (let index = 0; index < testList.length; index++) {
         try {
             const elem = testList[index];
@@ -66,7 +71,7 @@ async function run(args) {
         .filter(x => path.extname(x).toLocaleLowerCase() === '.js')
         .map(x => { return { filepath: x, filename: path.basename(x), exitCode: null, error: null }; });
 
-    const didSucceed = await runAllScriptsAsync(tests, args.errors);
+    const didSucceed = await runAllScriptsAsync(tests, args.errors || false);
     if (didSucceed === false) {
         if (core) {
             core.setFailed('One or more scripts failed');
