@@ -8,9 +8,7 @@ const process = require('process');
 const cliSpinners = require('cli-spinners');
 const glob = require('glob');
 
-//https://stackoverflow.com/questions/58570325/how-to-turn-child-process-spawns-promise-syntax-to-async-await-syntax
 async function runScriptAsync(path) {
-
     return await new Promise((resolve, reject) => {
         const cmd = `node ${path}`;
         exec(cmd, (err, stdout, stderr) => {
@@ -21,18 +19,6 @@ async function runScriptAsync(path) {
             resolve({ exitCode: 0, error: null });
         })
     });
-/*
-    const child = spawn('node', [path]);
-
-    let error = "";
-    for await (const chunk of child.stderr) {
-        error += chunk;
-    }
-
-    const exitCode = await new Promise((resolve, reject) => {
-        child.on('close', resolve);
-    });
-*/
 }
 
 async function runAllScriptsAsync(testList, showErrors) {
@@ -47,8 +33,7 @@ async function runAllScriptsAsync(testList, showErrors) {
             }).start();
             
             const result = await runScriptAsync(elem.filepath);
-            console.log('result', result);
-
+            
             if (result.exitCode === 0) {
                 //console.log(chalk.green.bold('success'));
                 spinner.succeed(chalk.green.bold('success'));
