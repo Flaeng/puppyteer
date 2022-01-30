@@ -13,9 +13,9 @@ async function runScriptAsync(path) {
     console.log('spawn');
     const child = spawn('node', [path]);
 
-    /*console.log('log errors');
+    console.log('log errors');
     let error = "";
-    for await (const chunk of child.stderr) {
+    /*for await (const chunk of child.stderr) {
         error += chunk;
     }*/
 
