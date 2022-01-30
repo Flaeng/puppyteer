@@ -9,3 +9,5 @@ CLI tool for running Google Chrome DevTools Recordings
 [![run with filter](https://github.com/Flaeng/puppyteer/actions/workflows/run-with-filter.yml/badge.svg)](https://github.com/Flaeng/puppyteer/actions/workflows/run-with-filter.yml)
 
 [![should fail - run with errors](https://github.com/Flaeng/puppyteer/actions/workflows/run-should-fail-with-errors.yml/badge.svg)](https://github.com/Flaeng/puppyteer/actions/workflows/run-should-fail-with-errors.yml)
+
+[![should fail - run](https://github.com/Flaeng/puppyteer/actions/workflows/run-should-fail.yml/badge.svg)](https://github.com/Flaeng/puppyteer/actions/workflows/run-should-fail.yml)
