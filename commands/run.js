@@ -1,5 +1,5 @@
 const fs = require('fs');
-const core = require('core');
+const core = require('@actions/core');
 const path = require('path');
 const { spawn } = require('child_process');
 const chalk = require('chalk');
