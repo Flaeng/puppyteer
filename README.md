@@ -62,10 +62,10 @@ Follow Google's guide for the devtools recorder: https://developer.chrome.com/do
 
 ## Known issues
 
-Known issues are shown in [this document](/documentation/known-issues.md)
+Known issues are shown in [this document](/docs/known-issues.md)
 
 ## Example
 
-![Example 1](/documentation/example1.jpg)
+![Example 1](/assets/example1.jpg)
 
-![Supported options](/documentation/supported-options.jpg)
+![Supported options](/assets/supported-options.jpg)
