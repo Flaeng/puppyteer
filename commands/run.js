@@ -23,6 +23,7 @@ async function runScriptAsync(path) {
 
     console.log('get exitcode');
     const exitCode = await new Promise((resolve, reject) => {
+        console.log('registering events');
         child.on('close', () => {
             console.log('did close');
             resolve();
@@ -39,6 +40,7 @@ async function runScriptAsync(path) {
             console.log('did exit');
             resolve();
         });
+        console.log('registered events');
     });
 
     console.log('return');
