@@ -1,31 +1,32 @@
 const fs = require('fs');
 const core = require('@actions/core');
 const path = require('path');
-const { spawn } = require('child_process');
+const { exec } = require('child_process');
 const chalk = require('chalk');
 const ora = require('ora');
 const process = require('process');
 const cliSpinners = require('cli-spinners');
 const glob = require('glob');
 
-//https://stackoverflow.com/questions/58570325/how-to-turn-child-process-spawns-promise-syntax-to-async-await-syntax
 async function runScriptAsync(path) {
-    const child = spawn('node', [path]);
-
-    let error = "";
-    for await (const chunk of child.stderr) {
-        error += chunk;
+    try {
+        return await new Promise((resolve, reject) => {
+            const cmd = `node ${path}`;
+            exec(cmd, (err, stdout, stderr) => {
+                if (err) {
+                    reject({ exitCode: 1, error: err });
+                    return;
+                }
+                resolve({ exitCode: 0, error: null });
+            })
+        });
     }
-
-    const exitCode = await new Promise((resolve, reject) => {
-        child.on('close', resolve);
-    });
-
-    return { exitCode, error };
+    catch (e) {
+        return { exitCode: 1, error: e };
+    }
 }
 
 async function runAllScriptsAsync(testList, showErrors) {
-
     for (let index = 0; index < testList.length; index++) {
         try {
             const elem = testList[index];
@@ -69,12 +70,10 @@ async function run(args) {
         .filter(x => path.extname(x).toLocaleLowerCase() === '.js')
         .map(x => { return { filepath: x, filename: path.basename(x), exitCode: null, error: null }; });
 
-    const didSucceed = await runAllScriptsAsync(tests, args.errors);
+    const didSucceed = await runAllScriptsAsync(tests, args.errors || false);
     if (didSucceed === false) {
         if (core) {
             core.setFailed('One or more scripts failed');
-            //process.exit(1);
-            return 1;
         }
         return 1;
     }
