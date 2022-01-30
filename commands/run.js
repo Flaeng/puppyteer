@@ -65,9 +65,9 @@ async function run(args) {
     //console.log('runExitCode', runExitCode);
     if (runExitCode === false) {
         core.setFailed(error.message);
-        return 0;
+        return 1;
     }
-    return 1;
+    return 0;
 }
 
 module.exports = run;
