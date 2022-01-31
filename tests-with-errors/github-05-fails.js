@@ -124,48 +124,30 @@ const puppeteer = require('puppeteer');
         const targetPage = page;
         const promises = [];
         promises.push(targetPage.waitForNavigation());
-        await targetPage.goto('https://github1337.com/');
+        await targetPage.goto('https://docs.github1337.com/');
         await Promise.all(promises);
     }
     {
         const targetPage = page;
-        const element = await waitForSelectors([["aria/Toggle navigation","aria/[role=\"graphics-symbol\"]"],["body > div.position-relative.js-header-wrapper > header > div > div.d-flex.flex-justify-between.flex-items-center > div.d-flex.flex-items-center > button > svg > path"]], targetPage);
-        await element.click({ offset: { x: 1230, y: 9} });
-    }
-    {
-        const targetPage = page;
-        const element = await waitForSelectors([["aria/Why GitHub?","aria/[role=\"graphics-symbol\"]"],["body > div.position-relative.js-header-wrapper > header > div > div.HeaderMenu.HeaderMenu--logged-out.position-fixed.top-0.right-0.bottom-0.height-fit.position-lg-relative.d-lg-flex.flex-justify-between.flex-items-center.flex-auto > nav > ul > li:nth-child(1) > details > summary > svg > path"]], targetPage);
-        await element.click({ offset: { x: 4, y: 4} });
+        const element = await waitForSelectors([["aria/Get started[role=\"link\"]"],["#main-content > div > section.container-xl.pb-lg-4.mt-6.px-3.px-md-6 > div > div > div:nth-child(1) > div > div.pt-2.mb-4.text-normal > ul > li:nth-child(1) > a"]], targetPage);
+        await element.click({ offset: { x: 36, y: 11.0625} });
     }
     {
         const targetPage = page;
         const promises = [];
         promises.push(targetPage.waitForNavigation());
-        const element = await waitForSelectors([["aria/Code review"],["body > div.position-relative.js-header-wrapper > header > div > div.HeaderMenu.HeaderMenu--logged-out.position-fixed.top-0.right-0.bottom-0.height-fit.position-lg-relative.d-lg-flex.flex-justify-between.flex-items-center.flex-auto > nav > ul > li:nth-child(1) > details > div > ul > li:nth-child(7) > a"]], targetPage);
-        await element.click({ offset: { x: 66, y: 14} });
+        const element = await waitForSelectors([["aria/GitHub's products","aria/[role=\"generic\"]"],["#main-content > div:nth-child(2) > div > div:nth-child(1) > ul > div > li:nth-child(1) > div > div > a > h3 > span"]], targetPage);
+        await element.click({ offset: { x: 91, y: 8} });
         await Promise.all(promises);
     }
     {
         const targetPage = page;
-        const element = await waitForSelectors([["aria/ See what’s possible"],["body > div.application-main > main > div:nth-child(1) > div > div > div > p > button"]], targetPage);
-        await element.click({ offset: { x: 163, y: 15.015625} });
+        const element = await waitForSelectors([["aria/About GitHub's products[role=\"link\"]"],["#main-content > div > div > div.Box-sc-nv15kw-0.ArticleGridLayout__SidebarContent-sc-we7dhr-1.ULBuM.bTEPfI.border-bottom.border-xl-0.pb-4.mb-5.pb-xl-0.mb-xl-0 > div > div > ul:nth-child(1) > li > div > div > div > div > a"]], targetPage);
+        await element.click({ offset: { x: 97, y: 3} });
     }
     {
         const targetPage = page;
-        const element = await waitForSelectors([["aria/Close video"],["body > div.application-main > main > div:nth-child(1) > div > div > div > span > button > svg"]], targetPage);
-        await element.click({ offset: { x: 10, y: 18.015625} });
-    }
-    {
-        const targetPage = page;
-        await targetPage.evaluate((x, y) => { window.scroll(x, y); }, 0, 1000)
-    }
-    {
-        const targetPage = page;
-        const promises = [];
-        promises.push(targetPage.waitForNavigation());
-        const element = await waitForSelectors([["aria/Learn how to compare branches with diffs "],["body > div.application-main > main > div.container-xl.p-responsive > div > div > div:nth-child(1) > p:nth-child(4) > a"]], targetPage);
-        await element.click({ offset: { x: 246.140625, y: 12.25} });
-        await Promise.all(promises);
+        await targetPage.evaluate((x, y) => { window.scroll(x, y); }, 0, 359)
     }
 
     await browser.close();
