@@ -74,16 +74,14 @@ async function handleDomain(tests, domain) {
                     }
 
                     const dataSplit = data.split('\n');
-                    const targetPageGoToIndex = dataSplit.map((x, index) => {
-                        if (x.trimStart().startsWith('await targetPage.goto(')) {
-                            return index;
-                        } else {
-                            return -1;
-                        }
-                    }).filter(x => x != -1);
+                    const targetPageGoToIndex = dataSplit
+                        .map((x, index) => x.trimStart().startsWith('await targetPage.goto(') ? index : -1)
+                        .filter(x => x != -1);
+                    
                     if (targetPageGoToIndex.length === 0) {
                         throw `Failed to find line with "await targetPage.goto(" in file at path: ${element.filepath}`;
                     }
+
                     dataSplit[targetPageGoToIndex[0]] = `        await targetPage.goto('${dom}');`;
 
                     const newFilePath = `${tempFolder}${element.filepath}`;
@@ -97,7 +95,6 @@ async function handleDomain(tests, domain) {
                             console.warn(err);
                             return;
                         }
-                        console.log('newFilePath', newFilePath);
                         element.filepath = newFilePath;
                         fileWriteResolve();
                     })
