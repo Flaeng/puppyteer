@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -20,4 +20,5 @@ jobs:
         run: npm install
 
       - name: npm run start
+        continue-on-error: true
         run: node --experimental-modules index.js run -p tests-with-errors

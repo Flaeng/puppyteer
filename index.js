@@ -2,6 +2,8 @@
 const { program } = require('commander');
 const run = require('./commands/run.js');
 
+program.name('puppyteer');
+
 program
     .command('run')
     .option('-p, --path <path>', 'Path to files (default: current directory)')
