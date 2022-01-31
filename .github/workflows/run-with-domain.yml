@@ -1,4 +1,4 @@
-name: run with filter
+name: run with domain
 
 on:
   push:
