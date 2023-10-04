@@ -73,3 +73,4 @@ Known issues are shown in [this document](/docs/known-issues.md)
 ![Example 1](https://raw.githubusercontent.com/Flaeng/puppyteer/main/assets/example1.jpg)
 
 ![Supported options](https://raw.githubusercontent.com/Flaeng/puppyteer/main/assets/supported-options.jpg)
+
